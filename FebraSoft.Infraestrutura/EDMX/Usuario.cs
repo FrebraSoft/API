@@ -12,19 +12,13 @@ namespace FebraSoft.Infraestrutura.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tbEmpresas
+    public partial class Usuario
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tbEmpresas()
-        {
-            this.tbClientes = new HashSet<tbClientes>();
-        }
-    
-        public int codEmpresa { get; set; }
+        public int codUsuario { get; set; }
         public string nome { get; set; }
-        public string cnpj { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbClientes> tbClientes { get; set; }
+        public string usuario { get; set; }
+        public string senha { get; set; }
+        public Nullable<System.DateTime> dataCadastro { get; set; }
+        public Nullable<bool> ativo { get; set; }
     }
 }

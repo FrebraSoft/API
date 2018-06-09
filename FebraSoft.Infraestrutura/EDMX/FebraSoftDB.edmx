@@ -67,7 +67,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FebraSoftDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tbClientes">
+        <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="codCliente" />
           </Key>
@@ -83,18 +83,17 @@
           <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="uf" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="provavel" Type="Int32" />
-          <NavigationProperty Name="tbEmpresas" Relationship="Self.FK_tbClientes_tbEmpresas" FromRole="tbClientes" ToRole="tbEmpresas" />
+          <NavigationProperty Name="Empresa" Relationship="Self.FK_tbClientes_tbEmpresas" FromRole="tbClientes" ToRole="tbEmpresas" />
         </EntityType>
-        <EntityType Name="tbEmpresas">
+        <EntityType Name="Empresa">
           <Key>
             <PropertyRef Name="codEmpresa" />
           </Key>
           <Property Name="codEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="cnpj" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbClientes" Relationship="Self.FK_tbClientes_tbEmpresas" FromRole="tbEmpresas" ToRole="tbClientes" />
         </EntityType>
-        <EntityType Name="tbUsuarios">
+        <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="codUsuario" />
           </Key>
@@ -106,8 +105,8 @@
           <Property Name="ativo" Type="Boolean" />
         </EntityType>
         <Association Name="FK_tbClientes_tbEmpresas">
-          <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="0..1" />
-          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="*" />
+          <End Role="tbEmpresas" Type="FebraSoftDBModel.Empresa" Multiplicity="0..1" />
+          <End Role="tbClientes" Type="FebraSoftDBModel.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbEmpresas">
               <PropertyRef Name="codEmpresa" />
@@ -118,12 +117,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FebraSoftDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tbClientes" EntityType="Self.tbClientes" />
-          <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" />
-          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" />
+          <EntitySet Name="Clientes" EntityType="FebraSoftDBModel.Cliente" />
+          <EntitySet Name="Empresas" EntityType="FebraSoftDBModel.Empresa" />
+          <EntitySet Name="Usuarios" EntityType="FebraSoftDBModel.Usuario" />
           <AssociationSet Name="FK_tbClientes_tbEmpresas" Association="Self.FK_tbClientes_tbEmpresas">
-            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
-            <End Role="tbClientes" EntitySet="tbClientes" />
+            <End Role="tbEmpresas" EntitySet="Empresas" />
+            <End Role="tbClientes" EntitySet="Clientes" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -132,8 +131,8 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FebraSoftDBModelStoreContainer" CdmEntityContainer="FebraSoftDBEntities">
-          <EntitySetMapping Name="tbClientes">
-            <EntityTypeMapping TypeName="FebraSoftDBModel.tbClientes">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.Cliente">
               <MappingFragment StoreEntitySet="tbClientes">
                 <ScalarProperty Name="codCliente" ColumnName="codCliente" />
                 <ScalarProperty Name="codEmpresa" ColumnName="codEmpresa" />
@@ -150,8 +149,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbEmpresas">
-            <EntityTypeMapping TypeName="FebraSoftDBModel.tbEmpresas">
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.Empresa">
               <MappingFragment StoreEntitySet="tbEmpresas">
                 <ScalarProperty Name="codEmpresa" ColumnName="codEmpresa" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
@@ -159,8 +158,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbUsuarios">
-            <EntityTypeMapping TypeName="FebraSoftDBModel.tbUsuarios">
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.Usuario">
               <MappingFragment StoreEntitySet="tbUsuarios">
                 <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
                 <ScalarProperty Name="nome" ColumnName="nome" />

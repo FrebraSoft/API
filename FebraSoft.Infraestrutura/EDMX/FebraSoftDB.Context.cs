@@ -25,8 +25,8 @@ namespace FebraSoft.Infraestrutura.EDMX
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tbClientes> tbClientes { get; set; }
-        public virtual DbSet<tbEmpresas> tbEmpresas { get; set; }
-        public virtual DbSet<tbUsuarios> tbUsuarios { get; set; }
+        public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Empresa> Empresas { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
     }
 }

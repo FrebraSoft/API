@@ -12,7 +12,7 @@ namespace FebraSoft.Infraestrutura.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tbClientes
+    public partial class Cliente
     {
         public int codCliente { get; set; }
         public Nullable<int> codEmpresa { get; set; }
@@ -27,6 +27,6 @@ namespace FebraSoft.Infraestrutura.EDMX
         public string uf { get; set; }
         public Nullable<int> provavel { get; set; }
     
-        public virtual tbEmpresas tbEmpresas { get; set; }
+        public virtual Empresa Empresa { get; set; }
     }
 }

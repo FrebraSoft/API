@@ -12,13 +12,10 @@ namespace FebraSoft.Infraestrutura.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class tbUsuarios
+    public partial class Empresa
     {
-        public int codUsuario { get; set; }
+        public int codEmpresa { get; set; }
         public string nome { get; set; }
-        public string usuario { get; set; }
-        public string senha { get; set; }
-        public Nullable<System.DateTime> dataCadastro { get; set; }
-        public Nullable<bool> ativo { get; set; }
+        public string cnpj { get; set; }
     }
 }
