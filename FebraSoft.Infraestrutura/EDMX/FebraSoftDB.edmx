@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FebraSoftDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbClientes">
+          <Key>
+            <PropertyRef Name="codCliente" />
+          </Key>
+          <Property Name="codCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codEmpresa" Type="int" />
+          <Property Name="razaoSocial" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="nomeFantasia" Type="nvarchar" MaxLength="250" />
+          <Property Name="cpfcnpj" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="logradouro" Type="nvarchar" MaxLength="50" />
+          <Property Name="numero" Type="nvarchar" MaxLength="50" />
+          <Property Name="complemento" Type="nvarchar" MaxLength="50" />
+          <Property Name="bairro" Type="nvarchar" MaxLength="50" />
+          <Property Name="cidade" Type="nvarchar" MaxLength="50" />
+          <Property Name="uf" Type="char" MaxLength="2" />
+          <Property Name="provavel" Type="int" />
+        </EntityType>
+        <EntityType Name="tbEmpresas">
+          <Key>
+            <PropertyRef Name="codEmpresa" />
+          </Key>
+          <Property Name="codEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="250" />
+          <Property Name="cnpj" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+          </Key>
+          <Property Name="codUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="250" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="250" />
+          <Property Name="senha" Type="nvarchar" MaxLength="150" />
+          <Property Name="dataCadastro" Type="datetime" />
+          <Property Name="ativo" Type="bit" />
+        </EntityType>
+        <Association Name="FK_tbClientes_tbEmpresas">
+          <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="0..1" />
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpresas">
+              <PropertyRef Name="codEmpresa" />
+            </Principal>
+            <Dependent Role="tbClientes">
+              <PropertyRef Name="codEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FebraSoftDBModelStoreContainer">
+          <EntitySet Name="tbClientes" EntityType="Self.tbClientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbClientes_tbEmpresas" Association="Self.FK_tbClientes_tbEmpresas">
+            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+            <End Role="tbClientes" EntitySet="tbClientes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FebraSoftDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbClientes">
+          <Key>
+            <PropertyRef Name="codCliente" />
+          </Key>
+          <Property Name="codCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codEmpresa" Type="Int32" />
+          <Property Name="razaoSocial" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nomeFantasia" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="cpfcnpj" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="logradouro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="numero" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="complemento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bairro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uf" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="provavel" Type="Int32" />
+          <NavigationProperty Name="tbEmpresas" Relationship="Self.FK_tbClientes_tbEmpresas" FromRole="tbClientes" ToRole="tbEmpresas" />
+        </EntityType>
+        <EntityType Name="tbEmpresas">
+          <Key>
+            <PropertyRef Name="codEmpresa" />
+          </Key>
+          <Property Name="codEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="cnpj" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tbClientes" Relationship="Self.FK_tbClientes_tbEmpresas" FromRole="tbEmpresas" ToRole="tbClientes" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="codUsuario" />
+          </Key>
+          <Property Name="codUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="usuario" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="senha" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="dataCadastro" Type="DateTime" Precision="3" />
+          <Property Name="ativo" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_tbClientes_tbEmpresas">
+          <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="0..1" />
+          <End Role="tbClientes" Type="Self.tbClientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpresas">
+              <PropertyRef Name="codEmpresa" />
+            </Principal>
+            <Dependent Role="tbClientes">
+              <PropertyRef Name="codEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FebraSoftDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbClientes" EntityType="Self.tbClientes" />
+          <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" />
+          <AssociationSet Name="FK_tbClientes_tbEmpresas" Association="Self.FK_tbClientes_tbEmpresas">
+            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+            <End Role="tbClientes" EntitySet="tbClientes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FebraSoftDBModelStoreContainer" CdmEntityContainer="FebraSoftDBEntities">
+          <EntitySetMapping Name="tbClientes">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.tbClientes">
+              <MappingFragment StoreEntitySet="tbClientes">
+                <ScalarProperty Name="codCliente" ColumnName="codCliente" />
+                <ScalarProperty Name="codEmpresa" ColumnName="codEmpresa" />
+                <ScalarProperty Name="razaoSocial" ColumnName="razaoSocial" />
+                <ScalarProperty Name="nomeFantasia" ColumnName="nomeFantasia" />
+                <ScalarProperty Name="cpfcnpj" ColumnName="cpfcnpj" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+                <ScalarProperty Name="provavel" ColumnName="provavel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEmpresas">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.tbEmpresas">
+              <MappingFragment StoreEntitySet="tbEmpresas">
+                <ScalarProperty Name="codEmpresa" ColumnName="codEmpresa" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUsuarios">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.tbUsuarios">
+              <MappingFragment StoreEntitySet="tbUsuarios">
+                <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="dataCadastro" ColumnName="dataCadastro" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
