@@ -8,7 +8,7 @@ using Swashbuckle.Swagger.Annotations;
 
 namespace FebraSoft.WebAPI.Controllers
 {
-    public class ValuesController : ApiController
+    public class UsuariosController : ApiController
     {
         // GET api/values
         [SwaggerOperation("GetAll")]

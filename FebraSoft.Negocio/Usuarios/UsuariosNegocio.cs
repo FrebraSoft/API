@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FebraSoft.Infraestrutura
+namespace FebraSoft.Negocio.Usuarios
 {
-    public class Class1
+    class UsuariosNegocio
     {
+
     }
 }

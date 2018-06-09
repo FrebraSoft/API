@@ -7,12 +7,12 @@ using System.Data;
 using FebraSoft.Infraestrutura.EDMX;
 using System.Data.Entity;
 
-namespace Dados.Usuarios
+namespace Dados.Usuarios 
 {
     /// <summary>
     /// Classe de Dados para Usuários
     /// </summary>
-    public class UsuarioDados
+    public class UsuarioDados : IUsuarioDados
     {
         #region ATRIBUTOS E CONSTRUTOR
         private FebraSoftDBEntities db = null;
