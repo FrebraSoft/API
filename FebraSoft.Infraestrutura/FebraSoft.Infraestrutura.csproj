@@ -55,10 +55,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FebraSoftDB.Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\FebraSoftDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\FebraSoftDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FebraSoftDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tbClientes.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tbEmpresas.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\tbUsuarios.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,13 +93,21 @@
     <Content Include="EDMX\FebraSoftDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>FebraSoftDB.Context.cs</LastGenOutput>
+      <DependentUpon>FebraSoftDB.edmx</DependentUpon>
     </Content>
+    <Content Include="EDMX\FebraSoftDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FebraSoftDB.edmx</DependentUpon>
+      <LastGenOutput>FebraSoftDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="SQL\FebraSoft.SQL.1.0.0.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.1.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.2.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.3.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SQL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
