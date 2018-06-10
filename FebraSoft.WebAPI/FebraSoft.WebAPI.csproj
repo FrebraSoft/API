@@ -157,6 +157,8 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\NFesRecebidasController.cs" />
+    <Compile Include="Controllers\NFesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="DTO\ViewModelToDomainMappingProfile.cs" />
     <Compile Include="DTO\DomainToViewModelMappingProfile.cs" />
