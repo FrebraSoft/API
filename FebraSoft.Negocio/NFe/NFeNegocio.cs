@@ -13,7 +13,7 @@ namespace FebraSoft.Negocio.NFes
     /// <summary>
     /// Classe de Dados para Usuários
     /// </summary>
-    public class NFeNegocio : INFeDados
+    public class NFeNegocio : INFeNegocio
     {
         #region ATRIBUTOS E CONSTRUTOR
         private INFeDados NFeDAO = null;
