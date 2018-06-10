@@ -5,6 +5,10 @@ using FebraSoft.Dados.Usuarios;
 using Unity;
 using Unity.Lifetime;
 using Unity.Injection;
+using FebraSoft.Negocio.NFes;
+using FebraSoft.Dados.NFes;
+using FebraSoft.Negocio.NFesRecebidas;
+using FebraSoft.Dados.NFeRecebidas;
 
 namespace FebraSoft.WebAPI.DTO
 {
@@ -55,6 +59,12 @@ namespace FebraSoft.WebAPI.DTO
         {
             container.RegisterType<IUsuarioNegocio, UsuarioNegocio>(new HierarchicalLifetimeManager());
             container.RegisterType<IUsuarioDados, UsuarioDados>(new HierarchicalLifetimeManager());
+
+            container.RegisterType<INFeNegocio, NFeNegocio>(new HierarchicalLifetimeManager());
+            container.RegisterType<INFeDados, NFeDados>(new HierarchicalLifetimeManager());
+
+            container.RegisterType<INFeRecebidaNegocio, NFeRecebidaNegocio>(new HierarchicalLifetimeManager());
+            container.RegisterType<INFeRecebidaDados, NFeRecebidaDados>(new HierarchicalLifetimeManager());
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FebraSoft.Dados.NFeRecebidas
     /// <summary>
     /// Classe de Dados para Usuários
     /// </summary>
-    public class NFeRecebidasDados : INFeRecebidaDados
+    public class NFeRecebidaDados : INFeRecebidaDados
     {
         #region ATRIBUTOS E CONSTRUTOR
         private FebraSoftDBEntities db = null;
@@ -21,7 +21,7 @@ namespace FebraSoft.Dados.NFeRecebidas
         /// Metodo contrutor
         /// </summary>
         /// <param name="db"></param>
-        public NFeRecebidasDados(FebraSoftDBEntities db)
+        public NFeRecebidaDados(FebraSoftDBEntities db)
         {
             this.db = db;
         }
