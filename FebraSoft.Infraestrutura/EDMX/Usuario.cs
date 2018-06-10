@@ -20,5 +20,6 @@ namespace FebraSoft.Infraestrutura.EDMX
         public string senha { get; set; }
         public Nullable<System.DateTime> dataCadastro { get; set; }
         public Nullable<bool> ativo { get; set; }
+        public string cpf { get; set; }
     }
 }
