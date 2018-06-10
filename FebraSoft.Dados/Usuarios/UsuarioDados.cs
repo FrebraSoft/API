@@ -74,6 +74,10 @@ namespace FebraSoft.Dados.Usuarios
             return db.Usuarios.SingleOrDefault(x => x.usuario.Equals(usuario));
         }
 
+        public bool SelecionaUsuarioLoginSenha(string login, string senha)
+        {
+            return db.Usuarios.Any(x => x.usuario.Equals(login) && x.senha.Equals(senha));
+        }
         #endregion
 
     }

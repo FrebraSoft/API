@@ -51,6 +51,11 @@ namespace FebraSoft.Negocio.Usuarios
         {
             return usuarioDAO.SelecionaUsuarioPorLogin(Login);
         }
+
+        public bool SelecionaUsuarioLoginSenha(string login, string senha)
+        {
+            return usuarioDAO.SelecionaUsuarioLoginSenha(login, senha);
+        }
         #endregion
 
     }

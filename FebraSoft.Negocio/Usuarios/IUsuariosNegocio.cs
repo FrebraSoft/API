@@ -28,5 +28,7 @@ namespace FebraSoft.Negocio.Usuarios
         /// <returns></returns>
         Usuario SelecionaUsuarioPorLogin(String Login);
 
+        bool SelecionaUsuarioLoginSenha(string login, string senha);
+
     }
 }

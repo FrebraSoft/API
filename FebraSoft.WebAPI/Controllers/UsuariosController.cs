@@ -20,9 +20,9 @@ namespace FebraSoft.WebAPI.Controllers
             this.usuarioNegocio = _usuarioNegocio;
         }
 
-        // GET api/values
-        [SwaggerOperation("GetAll")]
-        public HttpResponseMessage Get()
+        [HttpGet]
+        [ActionName("buscaUsuarios")]
+        public HttpResponseMessage GetTodosUsuarios()
         {
             try
             {
@@ -30,40 +30,33 @@ namespace FebraSoft.WebAPI.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.OK, listaUsuarios);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { erro = "Ocorreu um erro ao efetuar sua solicitação. Ex: "+ e.ToString() });
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { erro = "Ocorreu um erro ao efetuar sua solicitação. Ex: " + e.ToString() });
             }
         }
 
-        // GET api/values/5
-        [SwaggerOperation("GetById")]
-        public string Get(int id)
+
+        [HttpGet]
+        [ActionName("doLogin")]
+        public HttpResponseMessage GetDoLogin(string login, string senha)
         {
-            return "value";
+            try
+            {
+                bool acessoAutorizado = usuarioNegocio.SelecionaUsuarioLoginSenha(login, senha);
+
+                return Request.CreateResponse(HttpStatusCode.OK, new { acesso = acessoAutorizado });
+            }
+            catch (Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { erro = "Ocorreu um erro ao efetuar sua solicitação. Ex: " + e.ToString() });
+            }
         }
 
-        // POST api/values
-        [SwaggerOperation("Create")]
-        [SwaggerResponse(HttpStatusCode.Created)]
-        public void Post([FromBody]string value)
+        public class LoginUsuario
         {
-        }
-
-        // PUT api/values/5
-        [SwaggerOperation("Update")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [SwaggerOperation("Delete")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
-        public void Delete(int id)
-        {
+            public string login { get; set; }
+            public string senha { get; set; }
         }
     }
 }

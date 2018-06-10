@@ -75,6 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NFeRecebida\INfeRecebidaNegocio.cs" />
+    <Compile Include="NFeRecebida\NFeRecebidaNegocio.cs" />
     <Compile Include="NFe\INfeNegocio.cs" />
     <Compile Include="NFe\NFeNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

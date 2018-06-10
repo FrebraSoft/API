@@ -18,5 +18,6 @@ namespace FebraSoft.Dados.Usuarios
         Usuario SalvaUsuario(Usuario usuario);
         Usuario AlteraUsuario(Usuario usuario);
         Usuario SelecionaUsuarioPorLogin(String usuario);
+        bool SelecionaUsuarioLoginSenha(string login, string senha);
     }
 }
