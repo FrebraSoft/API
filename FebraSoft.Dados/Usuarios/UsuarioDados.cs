@@ -7,7 +7,7 @@ using System.Data;
 using FebraSoft.Infraestrutura.EDMX;
 using System.Data.Entity;
 
-namespace Dados.Usuarios 
+namespace FebraSoft.Dados.Usuarios
 {
     /// <summary>
     /// Classe de Dados para Usuários

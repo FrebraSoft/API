@@ -11,16 +11,14 @@ namespace FebraSoft.WebAPI.Controllers
     public class UsuariosController : ApiController
     {
         // GET api/values
-        [SwaggerOperation("GetAll")]
-        public IEnumerable<string> Get()
+        [ActionName("buscaTodosUsuarios")]
+        public IEnumerable<string> GetUsuarios()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
         [SwaggerOperation("GetById")]
-        [SwaggerResponse(HttpStatusCode.OK)]
-        [SwaggerResponse(HttpStatusCode.NotFound)]
         public string Get(int id)
         {
             return "value";
