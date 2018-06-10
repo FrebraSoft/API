@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
 using FebraSoft.Negocio.Usuarios;
+using System.Web.Http.Results;
 
 namespace FebraSoft.WebAPI.Controllers
 {
@@ -21,11 +22,18 @@ namespace FebraSoft.WebAPI.Controllers
 
         // GET api/values
         [SwaggerOperation("GetAll")]
-        public IEnumerable<string> Get()
+        public HttpResponseMessage Get()
         {
-            var x = usuarioNegocio.SelecionaUsuarioPorLogin("");
+            try
+            {
+                var listaUsuarios = usuarioNegocio.BuscaTodosUsuarios();
 
-            return Request.CreateResponse(HttpStatusCode.OK, "");
+                return Request.CreateResponse(HttpStatusCode.OK, listaUsuarios);
+            }
+            catch(Exception e)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { erro = "Ocorreu um erro ao efetuar sua solicitação. Ex: "+ e.ToString() });
+            }
         }
 
         // GET api/values/5

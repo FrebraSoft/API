@@ -11,6 +11,11 @@ namespace FebraSoft.Negocio.Usuarios
     public interface IUsuarioNegocio
     {
         /// <summary>
+        /// Metodo responsavel por buscar todos os usuarios
+        /// </summary>
+        IList<Usuario> BuscaTodosUsuarios();
+
+        /// <summary>
         /// Metodo responsavel por alterar o usuario
         /// </summary>
         /// <param name="usuario"></param>

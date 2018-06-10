@@ -37,6 +37,11 @@ namespace FebraSoft.Negocio.Usuarios
             return usuarioDAO.AlteraUsuario(usuario);
         }
 
+        public IList<Usuario> BuscaTodosUsuarios()
+        {
+            return usuarioDAO.BuscaTodosUsuario();
+        }
+
         /// <summary>
         /// Metodo responsavel por selecionar o Usuário
         /// </summary>
