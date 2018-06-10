@@ -2,19 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using AutoMapper;
 using System.Net.Http;
 using System.Web.Http;
 using Swashbuckle.Swagger.Annotations;
+using FebraSoft.Negocio.Usuarios;
 
 namespace FebraSoft.WebAPI.Controllers
 {
     public class UsuariosController : ApiController
     {
-        // GET api/values
-        [ActionName("buscaTodosUsuarios")]
-        public IEnumerable<string> GetUsuarios()
+        IUsuarioNegocio usuarioNegocio;
+
+        public UsuariosController(IUsuarioNegocio _usuarioNegocio)
         {
-            return new string[] { "value1", "value2" };
+            this.usuarioNegocio = _usuarioNegocio;
+        }
+
+        // GET api/values
+        [SwaggerOperation("GetAll")]
+        public IEnumerable<string> Get()
+        {
+            var x = usuarioNegocio.SelecionaUsuarioPorLogin("");
+
+            return Request.CreateResponse(HttpStatusCode.OK, "");
         }
 
         // GET api/values/5

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.Practices.Unity;
+using FebraSoft.WebAPI.DTO;
 
 namespace FebraSoft.WebAPI
 {
@@ -19,6 +21,11 @@ namespace FebraSoft.WebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            AutoMapperConfig.RegisterMappings();
+
+            //Configura a IoC
+            config.DependencyResolver = new UnityResolver(new ConfigureIoC().register());
         }
     }
 }
