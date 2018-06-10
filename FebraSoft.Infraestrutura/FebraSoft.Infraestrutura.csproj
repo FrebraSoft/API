@@ -141,6 +141,7 @@
     <Content Include="SQL\FebraSoft.SQL.1.0.0.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.1.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.2.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.9.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.8.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.7.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.6.sql" />
