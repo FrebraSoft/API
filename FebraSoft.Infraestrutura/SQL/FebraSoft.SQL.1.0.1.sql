@@ -1,7 +1,7 @@
 ﻿USE [FebraSoftDB]
 GO
 
-/****** Object:  Table [dbo].[tbUsuarios]    Script Date: 09/06/2018 12:09:15 ******/
+/****** Object:  Table [dbo].[tbUsuarios]    Script Date: 10/06/2018 01:26:38 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,6 +12,7 @@ CREATE TABLE [dbo].[tbUsuarios](
 	[codUsuario] [int] IDENTITY(1,1) NOT NULL,
 	[nome] [nvarchar](250) NULL,
 	[usuario] [nvarchar](250) NULL,
+	[cpf] [nvarchar](20) NULL,
 	[senha] [nvarchar](150) NULL,
 	[dataCadastro] [datetime] NULL,
 	[ativo] [bit] NULL,

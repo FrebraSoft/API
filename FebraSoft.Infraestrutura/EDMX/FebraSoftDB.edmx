@@ -59,6 +59,35 @@
           <Property Name="valorICMS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="valorIPI" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
+        <EntityType Name="tbNfesRecebidas">
+          <Key>
+            <PropertyRef Name="numeroNfeRecebida" />
+          </Key>
+          <Property Name="numeroNfeRecebida" Type="int" Nullable="false" />
+          <Property Name="dataEmissao" Type="datetime" />
+          <Property Name="chaveAcesso" Type="nvarchar" MaxLength="250" />
+          <Property Name="xml" Type="xml" />
+          <Property Name="valorTotalProdutos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalNFe" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalICMS" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbNFesRecebidasItens">
+          <Key>
+            <PropertyRef Name="numeroNfeRecebida" />
+            <PropertyRef Name="numeroItem" />
+          </Key>
+          <Property Name="numeroNfeRecebida" Type="int" Nullable="false" />
+          <Property Name="numeroItem" Type="int" Nullable="false" />
+          <Property Name="codProduto" Type="int" Nullable="false" />
+          <Property Name="cfop" Type="int" Nullable="false" />
+          <Property Name="numeroLote" Type="int" Nullable="false" />
+          <Property Name="quantidade" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="percentualICMS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="percentualIPI" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valorICMS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valorIPI" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbProdutos">
           <Key>
             <PropertyRef Name="codProduto" />
@@ -75,6 +104,7 @@
           <Property Name="codUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nome" Type="nvarchar" MaxLength="250" />
           <Property Name="usuario" Type="nvarchar" MaxLength="250" />
+          <Property Name="cpf" Type="nvarchar" MaxLength="20" />
           <Property Name="senha" Type="nvarchar" MaxLength="150" />
           <Property Name="dataCadastro" Type="datetime" />
           <Property Name="ativo" Type="bit" />
@@ -115,6 +145,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbNFesRecebidasItens_tbNfesRecebidas">
+          <End Role="tbNfesRecebidas" Type="Self.tbNfesRecebidas" Multiplicity="1" />
+          <End Role="tbNFesRecebidasItens" Type="Self.tbNFesRecebidasItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNfesRecebidas">
+              <PropertyRef Name="numeroNfeRecebida" />
+            </Principal>
+            <Dependent Role="tbNFesRecebidasItens">
+              <PropertyRef Name="numeroNfeRecebida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbNFesRecebidasItens_tbProdutos">
+          <End Role="tbProdutos" Type="Self.tbProdutos" Multiplicity="1" />
+          <End Role="tbNFesRecebidasItens" Type="Self.tbNFesRecebidasItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProdutos">
+              <PropertyRef Name="codProduto" />
+            </Principal>
+            <Dependent Role="tbNFesRecebidasItens">
+              <PropertyRef Name="codProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tbProdutos_tbEmpresas">
           <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="1" />
           <End Role="tbProdutos" Type="Self.tbProdutos" Multiplicity="*" />
@@ -132,6 +186,8 @@
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbNfes" EntityType="Self.tbNfes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbNFesItens" EntityType="Self.tbNFesItens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbNfesRecebidas" EntityType="Self.tbNfesRecebidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbNFesRecebidasItens" EntityType="Self.tbNFesRecebidasItens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbProdutos" EntityType="Self.tbProdutos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tbClientes_tbEmpresas" Association="Self.FK_tbClientes_tbEmpresas">
@@ -145,6 +201,14 @@
           <AssociationSet Name="FK_tbNFesItens_tbProdutos" Association="Self.FK_tbNFesItens_tbProdutos">
             <End Role="tbProdutos" EntitySet="tbProdutos" />
             <End Role="tbNFesItens" EntitySet="tbNFesItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbNFesRecebidasItens_tbNfesRecebidas" Association="Self.FK_tbNFesRecebidasItens_tbNfesRecebidas">
+            <End Role="tbNfesRecebidas" EntitySet="tbNfesRecebidas" />
+            <End Role="tbNFesRecebidasItens" EntitySet="tbNFesRecebidasItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbNFesRecebidasItens_tbProdutos" Association="Self.FK_tbNFesRecebidasItens_tbProdutos">
+            <End Role="tbProdutos" EntitySet="tbProdutos" />
+            <End Role="tbNFesRecebidasItens" EntitySet="tbNFesRecebidasItens" />
           </AssociationSet>
           <AssociationSet Name="FK_tbProdutos_tbEmpresas" Association="Self.FK_tbProdutos_tbEmpresas">
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
@@ -191,6 +255,7 @@
           <Property Name="senha" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="dataCadastro" Type="DateTime" Precision="3" />
           <Property Name="ativo" Type="Boolean" />
+          <Property Name="cpf" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_tbClientes_tbEmpresas">
           <End Role="tbEmpresas" Type="FebraSoftDBModel.Empresa" Multiplicity="0..1" />
@@ -226,6 +291,16 @@
           <AssociationSet Name="FK_tbNFesItens_tbProdutos" Association="FebraSoftDBModel.FK_tbNFesItens_tbProdutos">
             <End Role="tbProdutos" EntitySet="Produtos" />
             <End Role="tbNFesItens" EntitySet="NFeItens" />
+          </AssociationSet>
+          <EntitySet Name="NfesRecebidas" EntityType="FebraSoftDBModel.NFesRecebidas" />
+          <EntitySet Name="NFesRecebidasItens" EntityType="FebraSoftDBModel.NFeRecebidaItem" />
+          <AssociationSet Name="FK_tbNFesRecebidasItens_tbNfesRecebidas" Association="FebraSoftDBModel.FK_tbNFesRecebidasItens_tbNfesRecebidas">
+            <End Role="tbNfesRecebidas" EntitySet="NfesRecebidas" />
+            <End Role="tbNFesRecebidasItens" EntitySet="NFesRecebidasItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbNFesRecebidasItens_tbProdutos" Association="FebraSoftDBModel.FK_tbNFesRecebidasItens_tbProdutos">
+            <End Role="Produto" EntitySet="Produtos" />
+            <End Role="tbNFesRecebidasItens" EntitySet="NFesRecebidasItens" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="NFe">
@@ -305,6 +380,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="NFesRecebidas">
+          <Key>
+            <PropertyRef Name="numeroNfeRecebida" />
+          </Key>
+          <Property Name="numeroNfeRecebida" Type="Int32" Nullable="false" />
+          <Property Name="dataEmissao" Type="DateTime" Precision="3" />
+          <Property Name="chaveAcesso" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="xml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="valorTotalProdutos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalNFe" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalICMS" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="NFeRecebidaItens" Relationship="FebraSoftDBModel.FK_tbNFesRecebidasItens_tbNfesRecebidas" FromRole="tbNfesRecebidas" ToRole="tbNFesRecebidasItens" />
+        </EntityType>
+        <EntityType Name="NFeRecebidaItem">
+          <Key>
+            <PropertyRef Name="numeroNfeRecebida" />
+            <PropertyRef Name="numeroItem" />
+          </Key>
+          <Property Name="numeroNfeRecebida" Type="Int32" Nullable="false" />
+          <Property Name="numeroItem" Type="Int32" Nullable="false" />
+          <Property Name="codProduto" Type="Int32" Nullable="false" />
+          <Property Name="cfop" Type="Int32" Nullable="false" />
+          <Property Name="numeroLote" Type="Int32" Nullable="false" />
+          <Property Name="quantidade" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="percentualICMS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="percentualIPI" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="valorICMS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="valorIPI" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="Produto" Relationship="FebraSoftDBModel.FK_tbNFesRecebidasItens_tbProdutos" FromRole="tbNFesRecebidasItens" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK_tbNFesRecebidasItens_tbNfesRecebidas">
+          <End Type="FebraSoftDBModel.NFesRecebidas" Role="tbNfesRecebidas" Multiplicity="1" />
+          <End Type="FebraSoftDBModel.NFeRecebidaItem" Role="tbNFesRecebidasItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNfesRecebidas">
+              <PropertyRef Name="numeroNfeRecebida" />
+            </Principal>
+            <Dependent Role="tbNFesRecebidasItens">
+              <PropertyRef Name="numeroNfeRecebida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbNFesRecebidasItens_tbProdutos">
+          <End Type="FebraSoftDBModel.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="FebraSoftDBModel.NFeRecebidaItem" Role="tbNFesRecebidasItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="codProduto" />
+            </Principal>
+            <Dependent Role="tbNFesRecebidasItens">
+              <PropertyRef Name="codProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -341,6 +471,7 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="FebraSoftDBModel.Usuario">
               <MappingFragment StoreEntitySet="tbUsuarios">
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
                 <ScalarProperty Name="codUsuario" ColumnName="codUsuario" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="usuario" ColumnName="usuario" />
@@ -387,6 +518,36 @@
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="codEmpresa" ColumnName="codEmpresa" />
                 <ScalarProperty Name="codProduto" ColumnName="codProduto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NfesRecebidas">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.NFesRecebidas">
+              <MappingFragment StoreEntitySet="tbNfesRecebidas">
+                <ScalarProperty Name="valorTotalICMS" ColumnName="valorTotalICMS" />
+                <ScalarProperty Name="valorTotalNFe" ColumnName="valorTotalNFe" />
+                <ScalarProperty Name="valorTotalProdutos" ColumnName="valorTotalProdutos" />
+                <ScalarProperty Name="xml" ColumnName="xml" />
+                <ScalarProperty Name="chaveAcesso" ColumnName="chaveAcesso" />
+                <ScalarProperty Name="dataEmissao" ColumnName="dataEmissao" />
+                <ScalarProperty Name="numeroNfeRecebida" ColumnName="numeroNfeRecebida" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NFesRecebidasItens">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.NFeRecebidaItem">
+              <MappingFragment StoreEntitySet="tbNFesRecebidasItens">
+                <ScalarProperty Name="valorIPI" ColumnName="valorIPI" />
+                <ScalarProperty Name="valorICMS" ColumnName="valorICMS" />
+                <ScalarProperty Name="percentualIPI" ColumnName="percentualIPI" />
+                <ScalarProperty Name="percentualICMS" ColumnName="percentualICMS" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="quantidade" ColumnName="quantidade" />
+                <ScalarProperty Name="numeroLote" ColumnName="numeroLote" />
+                <ScalarProperty Name="cfop" ColumnName="cfop" />
+                <ScalarProperty Name="codProduto" ColumnName="codProduto" />
+                <ScalarProperty Name="numeroItem" ColumnName="numeroItem" />
+                <ScalarProperty Name="numeroNfeRecebida" ColumnName="numeroNfeRecebida" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
