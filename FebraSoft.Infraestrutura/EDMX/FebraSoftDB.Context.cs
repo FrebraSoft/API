@@ -31,7 +31,7 @@ namespace FebraSoft.Infraestrutura.EDMX
         public virtual DbSet<NFe> NFes { get; set; }
         public virtual DbSet<NFeItem> NFeItens { get; set; }
         public virtual DbSet<Produto> Produtos { get; set; }
-        public virtual DbSet<NFesRecebidas> NfesRecebidas { get; set; }
+        public virtual DbSet<NFeRecebida> NfesRecebidas { get; set; }
         public virtual DbSet<NFeRecebidaItem> NFesRecebidasItens { get; set; }
     }
 }

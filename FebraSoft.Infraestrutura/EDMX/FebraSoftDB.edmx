@@ -296,7 +296,7 @@
             <End Role="tbProdutos" EntitySet="Produtos" />
             <End Role="tbNFesItens" EntitySet="NFeItens" />
           </AssociationSet>
-          <EntitySet Name="NfesRecebidas" EntityType="FebraSoftDBModel.NFesRecebidas" />
+          <EntitySet Name="NfesRecebidas" EntityType="FebraSoftDBModel.NFeRecebida" />
           <EntitySet Name="NFesRecebidasItens" EntityType="FebraSoftDBModel.NFeRecebidaItem" />
           <AssociationSet Name="FK_tbNFesRecebidasItens_tbNfesRecebidas" Association="FebraSoftDBModel.FK_tbNFesRecebidasItens_tbNfesRecebidas">
             <End Role="tbNfesRecebidas" EntitySet="NfesRecebidas" />
@@ -388,7 +388,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="NFesRecebidas">
+        <EntityType Name="NFeRecebida">
           <Key>
             <PropertyRef Name="numeroNfeRecebida" />
           </Key>
@@ -420,7 +420,7 @@
           <NavigationProperty Name="Produto" Relationship="FebraSoftDBModel.FK_tbNFesRecebidasItens_tbProdutos" FromRole="tbNFesRecebidasItens" ToRole="Produto" />
         </EntityType>
         <Association Name="FK_tbNFesRecebidasItens_tbNfesRecebidas">
-          <End Type="FebraSoftDBModel.NFesRecebidas" Role="tbNfesRecebidas" Multiplicity="1" />
+          <End Type="FebraSoftDBModel.NFeRecebida" Role="tbNfesRecebidas" Multiplicity="1" />
           <End Type="FebraSoftDBModel.NFeRecebidaItem" Role="tbNFesRecebidasItens" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbNfesRecebidas">
@@ -534,7 +534,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NfesRecebidas">
-            <EntityTypeMapping TypeName="FebraSoftDBModel.NFesRecebidas">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.NFeRecebida">
               <MappingFragment StoreEntitySet="tbNfesRecebidas">
                 <ScalarProperty Name="valorTotalICMS" ColumnName="valorTotalICMS" />
                 <ScalarProperty Name="valorTotalNFe" ColumnName="valorTotalNFe" />

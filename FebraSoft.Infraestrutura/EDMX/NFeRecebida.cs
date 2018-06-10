@@ -12,10 +12,10 @@ namespace FebraSoft.Infraestrutura.EDMX
     using System;
     using System.Collections.Generic;
     
-    public partial class NFesRecebidas
+    public partial class NFeRecebida
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NFesRecebidas()
+        public NFeRecebida()
         {
             this.NFeRecebidaItens = new HashSet<NFeRecebidaItem>();
         }

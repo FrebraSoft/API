@@ -100,10 +100,10 @@
     <Compile Include="EDMX\NFeItem.cs">
       <DependentUpon>FebraSoftDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EDMX\NFeRecebidaItem.cs">
+    <Compile Include="EDMX\NFeRecebida.cs">
       <DependentUpon>FebraSoftDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="EDMX\NFesRecebidas.cs">
+    <Compile Include="EDMX\NFeRecebidaItem.cs">
       <DependentUpon>FebraSoftDB.tt</DependentUpon>
     </Compile>
     <Compile Include="EDMX\Produto.cs">
