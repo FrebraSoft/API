@@ -94,6 +94,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FebraSoftDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EDMX\NFe.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\NFeItem.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\NFeRecebidaItem.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\NFesRecebidas.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EDMX\Produto.cs">
+      <DependentUpon>FebraSoftDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="EDMX\Usuario.cs">
       <DependentUpon>FebraSoftDB.tt</DependentUpon>
     </Compile>
@@ -126,6 +141,11 @@
     <Content Include="SQL\FebraSoft.SQL.1.0.0.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.1.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.2.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.8.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.7.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.6.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.5.sql" />
+    <Content Include="SQL\FebraSoft.SQL.1.0.4.sql" />
     <Content Include="SQL\FebraSoft.SQL.1.0.3.sql" />
   </ItemGroup>
   <ItemGroup>

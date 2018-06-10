@@ -75,6 +75,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NFe\INFeDados.cs" />
+    <Compile Include="NFe\NFeDados.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuarios\IUsuarioDados.cs" />
     <Compile Include="Usuarios\UsuarioDados.cs" />
