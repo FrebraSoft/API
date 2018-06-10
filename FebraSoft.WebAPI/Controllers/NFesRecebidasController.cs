@@ -12,11 +12,11 @@ using FebraSoft.Infraestrutura.EDMX;
 
 namespace FebraSoft.WebAPI.Controllers
 {
-    public class NFesRecebidaController : ApiController
+    public class NFesRecebidasController : ApiController
     {
         INFeRecebidaNegocio nfeNegocio;
 
-        public NFesRecebidaController(INFeRecebidaNegocio nfeNegocio)
+        public NFesRecebidasController(INFeRecebidaNegocio nfeNegocio)
         {
             this.nfeNegocio = nfeNegocio;
         }
