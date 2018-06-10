@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FebraSoftDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FebraSoftDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbClientes">
           <Key>
             <PropertyRef Name="codCliente" />
@@ -30,6 +30,44 @@
           <Property Name="nome" Type="nvarchar" MaxLength="250" />
           <Property Name="cnpj" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="tbNfes">
+          <Key>
+            <PropertyRef Name="numeroNfe" />
+          </Key>
+          <Property Name="numeroNfe" Type="int" Nullable="false" />
+          <Property Name="dataEmissao" Type="datetime" />
+          <Property Name="chaveAcesso" Type="nvarchar" MaxLength="250" />
+          <Property Name="xml" Type="xml" />
+          <Property Name="valorTotalProdutos" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalNFe" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalICMS" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="tbNFesItens">
+          <Key>
+            <PropertyRef Name="numeroNfe" />
+            <PropertyRef Name="numeroItem" />
+          </Key>
+          <Property Name="numeroNfe" Type="int" Nullable="false" />
+          <Property Name="numeroItem" Type="int" Nullable="false" />
+          <Property Name="codProduto" Type="int" Nullable="false" />
+          <Property Name="cfop" Type="int" Nullable="false" />
+          <Property Name="numeroLote" Type="int" Nullable="false" />
+          <Property Name="quantidade" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="percentualICMS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="percentualIPI" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valorICMS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valorIPI" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbProdutos">
+          <Key>
+            <PropertyRef Name="codProduto" />
+          </Key>
+          <Property Name="codProduto" Type="int" Nullable="false" />
+          <Property Name="codEmpresa" Type="int" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="250" />
+          <Property Name="ativo" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbUsuarios">
           <Key>
             <PropertyRef Name="codUsuario" />
@@ -53,17 +91,67 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tbNFesItens_tbNfes">
+          <End Role="tbNfes" Type="Self.tbNfes" Multiplicity="1" />
+          <End Role="tbNFesItens" Type="Self.tbNFesItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNfes">
+              <PropertyRef Name="numeroNfe" />
+            </Principal>
+            <Dependent Role="tbNFesItens">
+              <PropertyRef Name="numeroNfe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbNFesItens_tbProdutos">
+          <End Role="tbProdutos" Type="Self.tbProdutos" Multiplicity="1" />
+          <End Role="tbNFesItens" Type="Self.tbNFesItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProdutos">
+              <PropertyRef Name="codProduto" />
+            </Principal>
+            <Dependent Role="tbNFesItens">
+              <PropertyRef Name="codProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbProdutos_tbEmpresas">
+          <End Role="tbEmpresas" Type="Self.tbEmpresas" Multiplicity="1" />
+          <End Role="tbProdutos" Type="Self.tbProdutos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbEmpresas">
+              <PropertyRef Name="codEmpresa" />
+            </Principal>
+            <Dependent Role="tbProdutos">
+              <PropertyRef Name="codEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FebraSoftDBModelStoreContainer">
           <EntitySet Name="tbClientes" EntityType="Self.tbClientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbEmpresas" EntityType="Self.tbEmpresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbNfes" EntityType="Self.tbNfes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbNFesItens" EntityType="Self.tbNFesItens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbProdutos" EntityType="Self.tbProdutos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tbClientes_tbEmpresas" Association="Self.FK_tbClientes_tbEmpresas">
             <End Role="tbEmpresas" EntitySet="tbEmpresas" />
             <End Role="tbClientes" EntitySet="tbClientes" />
           </AssociationSet>
+          <AssociationSet Name="FK_tbNFesItens_tbNfes" Association="Self.FK_tbNFesItens_tbNfes">
+            <End Role="tbNfes" EntitySet="tbNfes" />
+            <End Role="tbNFesItens" EntitySet="tbNFesItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbNFesItens_tbProdutos" Association="Self.FK_tbNFesItens_tbProdutos">
+            <End Role="tbProdutos" EntitySet="tbProdutos" />
+            <End Role="tbNFesItens" EntitySet="tbNFesItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbProdutos_tbEmpresas" Association="Self.FK_tbProdutos_tbEmpresas">
+            <End Role="tbEmpresas" EntitySet="tbEmpresas" />
+            <End Role="tbProdutos" EntitySet="tbProdutos" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FebraSoftDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -124,7 +212,99 @@
             <End Role="tbEmpresas" EntitySet="Empresas" />
             <End Role="tbClientes" EntitySet="Clientes" />
           </AssociationSet>
+          <EntitySet Name="tbNfes" EntityType="FebraSoftDBModel.NFe" />
+          <EntitySet Name="tbNFesItens" EntityType="FebraSoftDBModel.NFeItem" />
+          <EntitySet Name="tbProdutos" EntityType="FebraSoftDBModel.Produto" />
+          <AssociationSet Name="FK_tbProdutos_tbEmpresas" Association="FebraSoftDBModel.FK_tbProdutos_tbEmpresas">
+            <End Role="Empresa" EntitySet="Empresas" />
+            <End Role="tbProdutos" EntitySet="tbProdutos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbNFesItens_tbNfes" Association="FebraSoftDBModel.FK_tbNFesItens_tbNfes">
+            <End Role="tbNfes" EntitySet="tbNfes" />
+            <End Role="tbNFesItens" EntitySet="tbNFesItens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbNFesItens_tbProdutos" Association="FebraSoftDBModel.FK_tbNFesItens_tbProdutos">
+            <End Role="tbProdutos" EntitySet="tbProdutos" />
+            <End Role="tbNFesItens" EntitySet="tbNFesItens" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="NFe">
+          <Key>
+            <PropertyRef Name="numeroNfe" />
+          </Key>
+          <Property Name="numeroNfe" Type="Int32" Nullable="false" />
+          <Property Name="dataEmissao" Type="DateTime" Precision="3" />
+          <Property Name="chaveAcesso" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="xml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="valorTotalProdutos" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalNFe" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="valorTotalICMS" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="NFeItens" Relationship="FebraSoftDBModel.FK_tbNFesItens_tbNfes" FromRole="tbNfes" ToRole="tbNFesItens" />
+        </EntityType>
+        <EntityType Name="NFeItem">
+          <Key>
+            <PropertyRef Name="numeroNfe" />
+            <PropertyRef Name="numeroItem" />
+          </Key>
+          <Property Name="numeroNfe" Type="Int32" Nullable="false" />
+          <Property Name="numeroItem" Type="Int32" Nullable="false" />
+          <Property Name="codProduto" Type="Int32" Nullable="false" />
+          <Property Name="numeroLote" Type="Int32" Nullable="false" />
+          <Property Name="quantidade" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="percentualICMS" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="percentualIPI" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valorICMS" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valorIPI" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="FebraSoftDBModel.FK_tbNFesItens_tbProdutos" FromRole="tbNFesItens" ToRole="tbProdutos" />
+          <Property Name="cfop" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="codProduto" />
+          </Key>
+          <Property Name="codProduto" Type="Int32" Nullable="false" />
+          <Property Name="codEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Empresa" Relationship="FebraSoftDBModel.FK_tbProdutos_tbEmpresas" FromRole="tbProdutos" ToRole="Empresa" />
+        </EntityType>
+        <Association Name="FK_tbProdutos_tbEmpresas">
+          <End Type="FebraSoftDBModel.Empresa" Role="Empresa" Multiplicity="1" />
+          <End Type="FebraSoftDBModel.Produto" Role="tbProdutos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="codEmpresa" />
+            </Principal>
+            <Dependent Role="tbProdutos">
+              <PropertyRef Name="codEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbNFesItens_tbNfes">
+          <End Type="FebraSoftDBModel.NFe" Role="tbNfes" Multiplicity="1" />
+          <End Type="FebraSoftDBModel.NFeItem" Role="tbNFesItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbNfes">
+              <PropertyRef Name="numeroNfe" />
+            </Principal>
+            <Dependent Role="tbNFesItens">
+              <PropertyRef Name="numeroNfe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbNFesItens_tbProdutos">
+          <End Type="FebraSoftDBModel.Produto" Role="tbProdutos" Multiplicity="1" />
+          <End Type="FebraSoftDBModel.NFeItem" Role="tbNFesItens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbProdutos">
+              <PropertyRef Name="codProduto" />
+            </Principal>
+            <Dependent Role="tbNFesItens">
+              <PropertyRef Name="codProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -167,6 +347,46 @@
                 <ScalarProperty Name="senha" ColumnName="senha" />
                 <ScalarProperty Name="dataCadastro" ColumnName="dataCadastro" />
                 <ScalarProperty Name="ativo" ColumnName="ativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbNfes">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.NFe">
+              <MappingFragment StoreEntitySet="tbNfes">
+                <ScalarProperty Name="valorTotalICMS" ColumnName="valorTotalICMS" />
+                <ScalarProperty Name="valorTotalNFe" ColumnName="valorTotalNFe" />
+                <ScalarProperty Name="valorTotalProdutos" ColumnName="valorTotalProdutos" />
+                <ScalarProperty Name="xml" ColumnName="xml" />
+                <ScalarProperty Name="chaveAcesso" ColumnName="chaveAcesso" />
+                <ScalarProperty Name="dataEmissao" ColumnName="dataEmissao" />
+                <ScalarProperty Name="numeroNfe" ColumnName="numeroNfe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbNFesItens">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.NFeItem">
+              <MappingFragment StoreEntitySet="tbNFesItens">
+                <ScalarProperty Name="cfop" ColumnName="cfop" />
+                <ScalarProperty Name="valorIPI" ColumnName="valorIPI" />
+                <ScalarProperty Name="valorICMS" ColumnName="valorICMS" />
+                <ScalarProperty Name="percentualIPI" ColumnName="percentualIPI" />
+                <ScalarProperty Name="percentualICMS" ColumnName="percentualICMS" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="quantidade" ColumnName="quantidade" />
+                <ScalarProperty Name="numeroLote" ColumnName="numeroLote" />
+                <ScalarProperty Name="codProduto" ColumnName="codProduto" />
+                <ScalarProperty Name="numeroItem" ColumnName="numeroItem" />
+                <ScalarProperty Name="numeroNfe" ColumnName="numeroNfe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbProdutos">
+            <EntityTypeMapping TypeName="FebraSoftDBModel.Produto">
+              <MappingFragment StoreEntitySet="tbProdutos">
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="codEmpresa" ColumnName="codEmpresa" />
+                <ScalarProperty Name="codProduto" ColumnName="codProduto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

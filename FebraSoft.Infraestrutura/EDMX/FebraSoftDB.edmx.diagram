@@ -5,10 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1552217acd0d4d2eac56d9158aae01e6" Name="Diagram1">
-        <EntityTypeShape EntityType="FebraSoftDBModel.Cliente" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FebraSoftDBModel.Empresa" Width="1.5" PointX="1" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="FebraSoftDBModel.Usuario" Width="1.5" PointX="4.875" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FebraSoftDBModel.Cliente" Width="1.5" PointX="7.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FebraSoftDBModel.Empresa" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FebraSoftDBModel.Usuario" Width="1.5" PointX="9.125" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="FebraSoftDBModel.FK_tbClientes_tbEmpresas" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FebraSoftDBModel.NFe" Width="1.5" PointX="3.25" PointY="3.25" />
+        <EntityTypeShape EntityType="FebraSoftDBModel.NFeItem" Width="1.5" PointX="1.25" PointY="1" />
+        <EntityTypeShape EntityType="FebraSoftDBModel.Produto" Width="1.5" PointX="3.25" PointY="1" />
+        <AssociationConnector Association="FebraSoftDBModel.FK_tbProdutos_tbEmpresas" />
+        <AssociationConnector Association="FebraSoftDBModel.FK_tbNFesItens_tbNfes" />
+        <AssociationConnector Association="FebraSoftDBModel.FK_tbNFesItens_tbProdutos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
