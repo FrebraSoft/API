@@ -28,8 +28,8 @@ namespace FebraSoft.Infraestrutura.EDMX
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Empresa> Empresas { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<NFe> tbNfes { get; set; }
-        public virtual DbSet<NFeItem> tbNFesItens { get; set; }
-        public virtual DbSet<Produto> tbProdutos { get; set; }
+        public virtual DbSet<NFe> NFes { get; set; }
+        public virtual DbSet<NFeItem> NFeItens { get; set; }
+        public virtual DbSet<Produto> Produtos { get; set; }
     }
 }

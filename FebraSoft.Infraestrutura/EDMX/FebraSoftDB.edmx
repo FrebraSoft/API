@@ -212,20 +212,20 @@
             <End Role="tbEmpresas" EntitySet="Empresas" />
             <End Role="tbClientes" EntitySet="Clientes" />
           </AssociationSet>
-          <EntitySet Name="tbNfes" EntityType="FebraSoftDBModel.NFe" />
-          <EntitySet Name="tbNFesItens" EntityType="FebraSoftDBModel.NFeItem" />
-          <EntitySet Name="tbProdutos" EntityType="FebraSoftDBModel.Produto" />
+          <EntitySet Name="NFes" EntityType="FebraSoftDBModel.NFe" />
+          <EntitySet Name="NFeItens" EntityType="FebraSoftDBModel.NFeItem" />
+          <EntitySet Name="Produtos" EntityType="FebraSoftDBModel.Produto" />
           <AssociationSet Name="FK_tbProdutos_tbEmpresas" Association="FebraSoftDBModel.FK_tbProdutos_tbEmpresas">
             <End Role="Empresa" EntitySet="Empresas" />
-            <End Role="tbProdutos" EntitySet="tbProdutos" />
+            <End Role="tbProdutos" EntitySet="Produtos" />
           </AssociationSet>
           <AssociationSet Name="FK_tbNFesItens_tbNfes" Association="FebraSoftDBModel.FK_tbNFesItens_tbNfes">
-            <End Role="tbNfes" EntitySet="tbNfes" />
-            <End Role="tbNFesItens" EntitySet="tbNFesItens" />
+            <End Role="tbNfes" EntitySet="NFes" />
+            <End Role="tbNFesItens" EntitySet="NFeItens" />
           </AssociationSet>
           <AssociationSet Name="FK_tbNFesItens_tbProdutos" Association="FebraSoftDBModel.FK_tbNFesItens_tbProdutos">
-            <End Role="tbProdutos" EntitySet="tbProdutos" />
-            <End Role="tbNFesItens" EntitySet="tbNFesItens" />
+            <End Role="tbProdutos" EntitySet="Produtos" />
+            <End Role="tbNFesItens" EntitySet="NFeItens" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="NFe">
@@ -350,7 +350,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbNfes">
+          <EntitySetMapping Name="NFes">
             <EntityTypeMapping TypeName="FebraSoftDBModel.NFe">
               <MappingFragment StoreEntitySet="tbNfes">
                 <ScalarProperty Name="valorTotalICMS" ColumnName="valorTotalICMS" />
@@ -363,7 +363,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbNFesItens">
+          <EntitySetMapping Name="NFeItens">
             <EntityTypeMapping TypeName="FebraSoftDBModel.NFeItem">
               <MappingFragment StoreEntitySet="tbNFesItens">
                 <ScalarProperty Name="cfop" ColumnName="cfop" />
@@ -380,7 +380,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbProdutos">
+          <EntitySetMapping Name="Produtos">
             <EntityTypeMapping TypeName="FebraSoftDBModel.Produto">
               <MappingFragment StoreEntitySet="tbProdutos">
                 <ScalarProperty Name="ativo" ColumnName="ativo" />
