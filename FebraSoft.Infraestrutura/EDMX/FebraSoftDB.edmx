@@ -95,6 +95,10 @@
           <Property Name="codProduto" Type="int" Nullable="false" />
           <Property Name="codEmpresa" Type="int" Nullable="false" />
           <Property Name="nome" Type="nvarchar" MaxLength="250" />
+          <Property Name="dataUltimaCompra" Type="datetime" />
+          <Property Name="valorUltimaCompra" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="valorUltimoICMS" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="valorUltimoIPI" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ativo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tbUsuarios">
@@ -343,6 +347,10 @@
           <Property Name="nome" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="ativo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Empresa" Relationship="FebraSoftDBModel.FK_tbProdutos_tbEmpresas" FromRole="tbProdutos" ToRole="Empresa" />
+          <Property Name="dataUltimaCompra" Type="DateTime" Precision="3" />
+          <Property Name="valorUltimaCompra" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="valorUltimoICMS" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="valorUltimoIPI" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_tbProdutos_tbEmpresas">
           <End Type="FebraSoftDBModel.Empresa" Role="Empresa" Multiplicity="1" />
@@ -514,6 +522,10 @@
           <EntitySetMapping Name="Produtos">
             <EntityTypeMapping TypeName="FebraSoftDBModel.Produto">
               <MappingFragment StoreEntitySet="tbProdutos">
+                <ScalarProperty Name="valorUltimoIPI" ColumnName="valorUltimoIPI" />
+                <ScalarProperty Name="valorUltimoICMS" ColumnName="valorUltimoICMS" />
+                <ScalarProperty Name="valorUltimaCompra" ColumnName="valorUltimaCompra" />
+                <ScalarProperty Name="dataUltimaCompra" ColumnName="dataUltimaCompra" />
                 <ScalarProperty Name="ativo" ColumnName="ativo" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="codEmpresa" ColumnName="codEmpresa" />

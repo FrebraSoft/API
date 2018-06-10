@@ -18,6 +18,10 @@ namespace FebraSoft.Infraestrutura.EDMX
         public int codEmpresa { get; set; }
         public string nome { get; set; }
         public bool ativo { get; set; }
+        public Nullable<System.DateTime> dataUltimaCompra { get; set; }
+        public Nullable<decimal> valorUltimaCompra { get; set; }
+        public Nullable<decimal> valorUltimoICMS { get; set; }
+        public Nullable<decimal> valorUltimoIPI { get; set; }
     
         public virtual Empresa Empresa { get; set; }
     }
